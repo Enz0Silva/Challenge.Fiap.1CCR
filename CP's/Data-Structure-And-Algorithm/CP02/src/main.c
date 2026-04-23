@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
  
-
 #define MAX_NOTAS 10
  
 float notas[MAX_NOTAS];
-int   qtd_notas    = 0;
-float media        = 0.0;
-int   notas_inseridas = 0; /* flag: 1 se as notas ja foram inseridas */
+int   qtd_notas       = 0;
+float media           = 0.0;
+int   notas_inseridas = 0;
  
-
 void exibir_menu();
 void inserir_notas();
 void calcular_media();
@@ -20,11 +17,9 @@ void calcular_derivada();
 void limpar_tela();
 void pausar();
  
-
 int main() {
     int opcao;
  
-    /* do-while: continua em execucao ate o usuario escolher sair (opcao 6) */
     do {
         limpar_tela();
         exibir_menu();
@@ -32,7 +27,6 @@ int main() {
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
  
-        /* switch-case: direciona para a funcao correta */
         switch (opcao) {
             case 1:
                 inserir_notas();
@@ -57,12 +51,11 @@ int main() {
                 pausar();
         }
  
-    } while (opcao != 6); 
+    } while (opcao != 6);
  
     return 0;
 }
  
-/* Exibe o menu principal */
 void exibir_menu() {
     printf("==============================\n");
     printf("      SISTEMA EQUIPE XYZ      \n");
@@ -84,7 +77,6 @@ void inserir_notas() {
     printf("Quantas notas deseja inserir? (1 a %d): ", MAX_NOTAS);
     scanf("%d", &qtd_notas);
  
-    /* if-else: valida a quantidade informada */
     if (qtd_notas < 1 || qtd_notas > MAX_NOTAS) {
         printf("  Quantidade invalida! Use entre 1 e %d.\n", MAX_NOTAS);
         qtd_notas = 0;
@@ -93,15 +85,12 @@ void inserir_notas() {
     }
  
     i = 0;
-    /* while: le cada nota com validacao de intervalo 0-10 */
     while (i < qtd_notas) {
         printf("  Nota %d: ", i + 1);
         scanf("%f", &nota);
  
-        /* if-else: verifica se a nota esta no intervalo valido */
         if (nota < 0.0 || nota > 10.0) {
             printf("  Nota invalida! Digite um valor entre 0 e 10.\n");
-            /* nao incrementa i, repete a leitura desta nota */
         } else {
             notas[i] = nota;
             i++;
@@ -109,25 +98,23 @@ void inserir_notas() {
     }
  
     notas_inseridas = 1;
-    media = 0.0; /* reseta a media ao inserir novas notas */
+    media = 0.0;
     printf("\n  %d nota(s) inserida(s) com sucesso!\n", qtd_notas);
     pausar();
 }
-     
-    void calcular_media() {
+ 
+void calcular_media() {
     int i;
     float soma = 0.0;
  
     printf("\n--- CALCULAR MEDIA ---\n");
  
-    /* if-else: verifica se ha notas inseridas antes de calcular */
     if (notas_inseridas == 0 || qtd_notas == 0) {
         printf("  Nenhuma nota inserida! Use a opcao 1 primeiro.\n");
         pausar();
         return;
     }
  
-    /* soma todas as notas */
     i = 0;
     while (i < qtd_notas) {
         soma += notas[i];
@@ -139,38 +126,43 @@ void inserir_notas() {
     pausar();
 }
  
-    void calcular_media() {
-    int i;
-    float soma = 0.0;
+void verificar_situacao() {
+    printf("\n--- VERIFICAR SITUACAO ---\n");
  
-    printf("\n--- CALCULAR MEDIA ---\n");
- 
-    /* if-else: verifica se ha notas inseridas antes de calcular */
-    if (notas_inseridas == 0 || qtd_notas == 0) {
-        printf("  Nenhuma nota inserida! Use a opcao 1 primeiro.\n");
+    if (notas_inseridas == 0) {
+        printf("  Insira as notas primeiro (opcao 1).\n");
         pausar();
         return;
     }
  
-    /* soma todas as notas */
-    i = 0;
-    while (i < qtd_notas) {
-        soma += notas[i];
-        i++;
+    if (media == 0.0 && qtd_notas > 0) {
+        printf("  Calcule a media primeiro (opcao 2).\n");
+        pausar();
+        return;
     }
  
-    media = soma / qtd_notas;
-    printf("  Media calculada: %.2f\n", media);
+    printf("  Media atual: %.2f\n\n", media);
+ 
+    if (media >= 7.0) {
+        printf("  Situacao: APROVADO\n");
+        printf("  Parabens! Voce atingiu a media necessaria.\n");
+    } else if (media >= 5.0) {
+        printf("  Situacao: RECUPERACAO\n");
+        printf("  Voce esta em recuperacao. Media minima: 7.0\n");
+    } else {
+        printf("  Situacao: REPROVADO\n");
+        printf("  Infelizmente voce foi reprovado. Media minima: 5.0\n");
+    }
+ 
     pausar();
 }
-
-    void exibir_resultado() {
+ 
+void exibir_resultado() {
     int i;
     float maior, menor;
  
     printf("\n--- EXIBIR RESULTADO ---\n");
  
-    /* if-else: verifica pre-requisito */
     if (notas_inseridas == 0) {
         printf("  Insira as notas primeiro (opcao 1).\n");
         pausar();
@@ -189,7 +181,6 @@ void inserir_notas() {
     while (i < qtd_notas) {
         printf("  | P%-6d | %6.2f |\n", i + 1, notas[i]);
  
-        /* if-else: atualiza maior e menor */
         if (notas[i] > maior) maior = notas[i];
         if (notas[i] < menor) menor = notas[i];
         i++;
@@ -197,13 +188,11 @@ void inserir_notas() {
  
     printf("  +---------+--------+\n");
  
-    /* exibe media se calculada */
     if (media > 0.0 || qtd_notas > 0) {
         printf("\n  Media   : %.2f\n", media);
         printf("  Maior   : %.2f\n", maior);
         printf("  Menor   : %.2f\n", menor);
  
-        /* if-else: exibe situacao resumida */
         if (media >= 7.0) {
             printf("  Situacao: APROVADO\n");
         } else if (media >= 5.0) {
@@ -218,10 +207,6 @@ void inserir_notas() {
     pausar();
 }
  
-/*
- * Calcula a derivada numerica de f(x) = x^2 + 3x - 5
- * usando o metodo da diferenca finita central: f'(x) = [f(x+h) - f(x-h)] / (2h)
- */
 void calcular_derivada() {
     float x, h, fx_mais_h, fx_menos_h, derivada;
  
@@ -232,7 +217,7 @@ void calcular_derivada() {
     printf("  Informe o valor de x: ");
     scanf("%f", &x);
  
-    h = 0.0001f; /* passo pequeno para boa precisao */
+    h = 0.0001f;
  
     fx_mais_h  = (x + h) * (x + h) + 3 * (x + h) - 5;
     fx_menos_h = (x - h) * (x - h) + 3 * (x - h) - 5;
@@ -244,8 +229,7 @@ void calcular_derivada() {
  
     pausar();
 }
-
-    /* Limpa a tela de forma compativel com Windows e Linux/Mac */
+ 
 void limpar_tela() {
 #ifdef _WIN32
     system("cls");
@@ -254,11 +238,8 @@ void limpar_tela() {
 #endif
 }
  
-/* Pausa ate o usuario pressionar Enter */
 void pausar() {
     printf("\n  Pressione Enter para continuar...");
-    /* limpa o buffer e aguarda */
     while (getchar() != '\n');
     getchar();
 }
-    
