@@ -83,3 +83,40 @@ void exibir_menu() {
     printf("==============================\n");
 }
  
+void inserir_notas() {
+    int i;
+    float nota;
+ 
+    printf("\n--- INSERIR NOTAS ---\n");
+    printf("Quantas notas deseja inserir? (1 a %d): ", MAX_NOTAS);
+    scanf("%d", &qtd_notas);
+ 
+    /* if-else: valida a quantidade informada */
+    if (qtd_notas < 1 || qtd_notas > MAX_NOTAS) {
+        printf("  Quantidade invalida! Use entre 1 e %d.\n", MAX_NOTAS);
+        qtd_notas = 0;
+        pausar();
+        return;
+    }
+ 
+    i = 0;
+    /* while: le cada nota com validacao de intervalo 0-10 */
+    while (i < qtd_notas) {
+        printf("  Nota %d: ", i + 1);
+        scanf("%f", &nota);
+ 
+        /* if-else: verifica se a nota esta no intervalo valido */
+        if (nota < 0.0 || nota > 10.0) {
+            printf("  Nota invalida! Digite um valor entre 0 e 10.\n");
+            /* nao incrementa i, repete a leitura desta nota */
+        } else {
+            notas[i] = nota;
+            i++;
+        }
+    }
+ 
+    notas_inseridas = 1;
+    media = 0.0; /* reseta a media ao inserir novas notas */
+    printf("\n  %d nota(s) inserida(s) com sucesso!\n", qtd_notas);
+    pausar();
+}
