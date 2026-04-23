@@ -64,7 +64,7 @@ void exibir_menu() {
     printf("  2 - Calcular media\n");
     printf("  3 - Verificar situacao\n");
     printf("  4 - Exibir resultado\n");
-    printf("  5 - Calcular derivada\n");
+    printf("  5 - Calcular Derivada Geral\n");
     printf("  6 - Sair\n");
     printf("==============================\n");
 }
@@ -207,27 +207,25 @@ void exibir_resultado() {
     pausar();
 }
  
-void calcular_derivada() {
-    float x, h, fx_mais_h, fx_menos_h, derivada;
- 
-    printf("\n--- CALCULAR DERIVADA ---\n");
-    printf("  Funcao: f(x) = x^2 + 3x - 5\n");
-    printf("  Metodo: diferenca finita central\n\n");
- 
-    printf("  Informe o valor de x: ");
-    scanf("%f", &x);
- 
-    h = 0.0001f;
- 
-    fx_mais_h  = (x + h) * (x + h) + 3 * (x + h) - 5;
-    fx_menos_h = (x - h) * (x - h) + 3 * (x - h) - 5;
- 
-    derivada = (fx_mais_h - fx_menos_h) / (2 * h);
- 
-    printf("\n  f'(%.4f) = %.4f\n", x, derivada);
-    printf("  (Derivada analitica: f'(x) = 2x + 3 => %.4f)\n", 2 * x + 3);
- 
-    pausar();
+void calcular_derivada_geral() {
+
+    float coeficiente, expoente;
+    float novoCoeficiente, novoExpoente;
+
+    printf("\n--- CALCULO DE DERIVADA GERAL (ax^n) ---\n");
+    printf("Digite o coeficiente (a): ");
+    scanf("%f", &coeficiente);
+    
+    printf("Digite o expoente (n): ");
+    scanf("%f", &expoente);
+
+    // Regra da Potencia Geral: f'(x) = (a * n) * x^(n - 1)
+    novoCoeficiente = coeficiente * expoente;
+    novoExpoente = expoente - 1;
+
+    printf("\n----------------------------------------\n");
+    printf("Funcao original: f(x) = %.2fx^%.2f\n", coeficiente, expoente);
+
 }
  
 void limpar_tela() {
