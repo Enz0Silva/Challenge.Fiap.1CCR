@@ -120,3 +120,32 @@ void inserir_notas() {
     printf("\n  %d nota(s) inserida(s) com sucesso!\n", qtd_notas);
     pausar();
 }
+     
+    void calcular_media() {
+    int i;
+    float soma = 0.0;
+ 
+    printf("\n--- CALCULAR MEDIA ---\n");
+ 
+    /* if-else: verifica se ha notas inseridas antes de calcular */
+    if (notas_inseridas == 0 || qtd_notas == 0) {
+        printf("  Nenhuma nota inserida! Use a opcao 1 primeiro.\n");
+        pausar();
+        return;
+    }
+ 
+    /* soma todas as notas */
+    i = 0;
+    while (i < qtd_notas) {
+        soma += notas[i];
+        i++;
+    }
+ 
+    media = soma / qtd_notas;
+    printf("  Media calculada: %.2f\n", media);
+    pausar();
+}
+ 
+
+
+    
