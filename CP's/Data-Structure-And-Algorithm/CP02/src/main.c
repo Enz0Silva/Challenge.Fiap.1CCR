@@ -225,7 +225,17 @@ void calcular_derivada_geral() {
 
     printf("\n----------------------------------------\n");
     printf("Funcao original: f(x) = %.2fx^%.2f\n", coeficiente, expoente);
-
+   
+   
+    // Tratamento logico para exibicao
+    if (novoExpoente == 0) {
+        printf("Derivada: f'(x) = %.2f\n", novoCoeficiente);
+    } else if (novoExpoente == 1) {
+        printf("Derivada: f'(x) = %.2fx\n", novoCoeficiente);
+    } else {
+        printf("Derivada: f'(x) = %.2fx^%.2f\n", novoCoeficiente, novoExpoente);
+    }
+    printf("----------------------------------------\n");
 }
  
 void limpar_tela() {
