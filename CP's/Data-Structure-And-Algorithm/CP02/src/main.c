@@ -244,4 +244,21 @@ void calcular_derivada() {
  
     pausar();
 }
+
+    /* Limpa a tela de forma compativel com Windows e Linux/Mac */
+void limpar_tela() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
+}
+ 
+/* Pausa ate o usuario pressionar Enter */
+void pausar() {
+    printf("\n  Pressione Enter para continuar...");
+    /* limpa o buffer e aguarda */
+    while (getchar() != '\n');
+    getchar();
+}
     
