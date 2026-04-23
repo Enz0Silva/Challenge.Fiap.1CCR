@@ -164,4 +164,84 @@ void inserir_notas() {
     pausar();
 }
 
+    void exibir_resultado() {
+    int i;
+    float maior, menor;
+ 
+    printf("\n--- EXIBIR RESULTADO ---\n");
+ 
+    /* if-else: verifica pre-requisito */
+    if (notas_inseridas == 0) {
+        printf("  Insira as notas primeiro (opcao 1).\n");
+        pausar();
+        return;
+    }
+ 
+    printf("  Notas inseridas:\n");
+    printf("  +---------+--------+\n");
+    printf("  | Prova   | Nota   |\n");
+    printf("  +---------+--------+\n");
+ 
+    maior = notas[0];
+    menor = notas[0];
+ 
+    i = 0;
+    while (i < qtd_notas) {
+        printf("  | P%-6d | %6.2f |\n", i + 1, notas[i]);
+ 
+        /* if-else: atualiza maior e menor */
+        if (notas[i] > maior) maior = notas[i];
+        if (notas[i] < menor) menor = notas[i];
+        i++;
+    }
+ 
+    printf("  +---------+--------+\n");
+ 
+    /* exibe media se calculada */
+    if (media > 0.0 || qtd_notas > 0) {
+        printf("\n  Media   : %.2f\n", media);
+        printf("  Maior   : %.2f\n", maior);
+        printf("  Menor   : %.2f\n", menor);
+ 
+        /* if-else: exibe situacao resumida */
+        if (media >= 7.0) {
+            printf("  Situacao: APROVADO\n");
+        } else if (media >= 5.0) {
+            printf("  Situacao: RECUPERACAO\n");
+        } else {
+            printf("  Situacao: REPROVADO\n");
+        }
+    } else {
+        printf("\n  (Calcule a media pela opcao 2 para ver o resultado completo)\n");
+    }
+ 
+    pausar();
+}
+ 
+/*
+ * Calcula a derivada numerica de f(x) = x^2 + 3x - 5
+ * usando o metodo da diferenca finita central: f'(x) = [f(x+h) - f(x-h)] / (2h)
+ */
+void calcular_derivada() {
+    float x, h, fx_mais_h, fx_menos_h, derivada;
+ 
+    printf("\n--- CALCULAR DERIVADA ---\n");
+    printf("  Funcao: f(x) = x^2 + 3x - 5\n");
+    printf("  Metodo: diferenca finita central\n\n");
+ 
+    printf("  Informe o valor de x: ");
+    scanf("%f", &x);
+ 
+    h = 0.0001f; /* passo pequeno para boa precisao */
+ 
+    fx_mais_h  = (x + h) * (x + h) + 3 * (x + h) - 5;
+    fx_menos_h = (x - h) * (x - h) + 3 * (x - h) - 5;
+ 
+    derivada = (fx_mais_h - fx_menos_h) / (2 * h);
+ 
+    printf("\n  f'(%.4f) = %.4f\n", x, derivada);
+    printf("  (Derivada analitica: f'(x) = 2x + 3 => %.4f)\n", 2 * x + 3);
+ 
+    pausar();
+}
     
