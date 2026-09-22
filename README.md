@@ -9,7 +9,6 @@ Turma 1CCR, semestre 2026.1 — Time RM 574085
 
 - Enzo Ricardo Silva, RM 571333
 - Eric Hernandes Penhalbell, RM 570237
-- Murilo Ignacio, RM 573621
 - Matheus Borges Soares, RM 574085
 - Joao Guilherme Figueiredo, RM 572697
 - Ryan Luther Roque, RM 572993
